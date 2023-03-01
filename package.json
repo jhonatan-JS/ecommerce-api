@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "dev": "ts-node ./src/app.ts",
+    "dev": "nodemon ./src/app.ts",
     "build": "tsc",
-    "start": "nodemon ./src/app.ts"
+    "start": "ts-node ./src/app.ts"
   },
   "name": "ecommerce",
   "version": "1.0.0",

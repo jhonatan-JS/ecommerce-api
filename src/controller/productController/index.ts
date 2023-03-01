@@ -2,13 +2,14 @@ import Product from '../../models/product';
 
 const ProductController = {
   async create(req: any, res: any) {
-    const { name, description, brand, image, price } = req.body;
+    const { name, description, brand, price } = req.body;
+    const { filename } = req.file;
 
     const product = {
       name,
       description,
       brand,
-      image,
+      filename,
       price,
     };
 
