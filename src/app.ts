@@ -29,9 +29,7 @@ mongoose
   )
 
   .then(() => {
-    app.listen(3333, () => {
-      console.log('Server started on port 3333');
-    });
+    app.listen(process.env.PORT || 3333);
   })
   .catch((err: any) => {
     console.log('Connection failed:', err);
