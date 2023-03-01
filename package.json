@@ -2,8 +2,7 @@
   "scripts": {
     "dev": "nodemon ./src/app.ts",
     "build": "tsc",
-    "start": "ts-node ./src/app.ts",
-    "type": "module"
+    "start": "ts-node ./src/app.ts"
   },
   "name": "ecommerce",
   "version": "1.0.0",

@@ -8,8 +8,7 @@ import productRoutes from './routes/products.routes';
 
 import dotenv from 'dotenv';
 dotenv.config();
-const DB_USER = process.env.DB_USER;
-const DB_PASS = encodeURIComponent(process.env.DB_PASS || '');
+const MONGO_URL = process.env.MONGO_URL;
 
 const app = express();
 app.use(
@@ -24,9 +23,7 @@ app.use('/user', userRoutes);
 app.use('/product', productRoutes);
 
 mongoose
-  .connect(
-    `mongodb+srv://${DB_USER}:${DB_PASS}@cluster0.pwl4ean.mongodb.net/?retryWrites=true&w=majority`,
-  )
+  .connect(`${MONGO_URL}`)
 
   .then(() => {
     app.listen(process.env.PORT || 3333);
