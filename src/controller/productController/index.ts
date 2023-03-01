@@ -1,43 +1,42 @@
-import fs from 'fs';
-import { google } from 'googleapis';
+import Product from '../../models/product';
 
-import dotenv from 'dotenv';
-dotenv.config();
+const ProductController = {
+  async create(req: any, res: any) {
+    const { name, description, brand, image, price } = req.body;
 
-const GOOGLE_API_FOLDER_ID = process.env.GOOGLE_API_FOLDER_ID;
-
-const uploadFile = async (fileMulter: any) => {
-  try {
-    const auth = new google.auth.GoogleAuth({
-      keyFile: GOOGLE_API_FOLDER_ID,
-      scopes: ['https://www.googleapis.com/auth/drive'],
-    });
-
-    const driveService = google.drive({
-      version: 'v3',
-      auth,
-    });
-
-    const fileMetadata = {
-      name: fileMulter.filename,
-      parents: [GOOGLE_API_FOLDER_ID],
+    const product = {
+      name,
+      description,
+      brand,
+      image,
+      price,
     };
 
-    const media = {
-      mimeType: fileMulter.mimetype,
-      body: fs.createReadStream(`../../../uploads/${fileMulter.filename}`),
-    };
+    try {
+      await Product.create(product);
+      res.status(201).json({ message: 'Product created' });
+    } catch (err) {
+      console.log(err);
+      res.status(404).json({ message: 'Product not created' });
+    }
+  },
 
-    const response = await driveService.files.create({
-      requestBody: fileMetadata,
-      media: media,
-      fields: 'id',
-    });
-    console.log('response', response);
-    return response;
-  } catch (err) {
-    console.log(err);
-  }
+  // const product = {
+  //   name,
+  //   description,
+  //   brand,
+  //   image: filename,
+  //   price,
+  // };
+
+  // try {
+  //   await Product.create(product);
+  //   console.log(product);
+  //   res.status(201).json({ message: 'Product created' });
+  // } catch (err) {
+  //   console.log(err);
+  //   res.status(404).json({ message: 'Product not created' });
+  // }
 };
 
-export default uploadFile;
+export default ProductController;

@@ -3,39 +3,12 @@ import Product from '../models/product';
 import multer from 'multer';
 import multerConf from '../controller/multer';
 
-import productController from '../controller/productController';
+import ProductController from '../controller/productController';
 
 const router = Router();
-
 const upload = multer(multerConf);
 
-router.post('/', upload.single('image'), async (req, res) => {
-  const { name, description, brand, image, price } = req.body;
-  let flag = false;
-  const fileMulter = req.file;
-
-  const createProduct = async () => {
-    const product = {
-      name,
-      description,
-      brand,
-      image,
-      price,
-    };
-
-    try {
-      await Product.create(product);
-      res.status(201).json({ message: 'Product created' });
-    } catch (err) {
-      res.status(404).json({ message: 'Product not created' });
-    }
-  };
-
-  setTimeout(async () => {
-    await productController(fileMulter);
-    createProduct();
-  }, 4000);
-});
+router.post('/', upload.single('image'), ProductController.create);
 
 router.get('/', async (req, res) => {
   try {

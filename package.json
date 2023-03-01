@@ -1,30 +1,31 @@
 {
-  "name": "ecommerce-api",
+  "scripts": {
+    "dev": "ts-node ./src/app.ts",
+    "build": "tsc",
+    "start": "nodemon ./src/app.ts"
+  },
+  "name": "ecommerce",
   "version": "1.0.0",
   "description": "",
-  "main": "src/app.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/app.ts localhost 3333"
-  },
+  "main": "index.js",
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
     "@types/multer": "^1.4.7",
-    "@types/node": "^18.14.0",
+    "@types/node": "^18.14.2",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "googleapis": "^111.0.0",
-    "mongoose": "^6.9.2",
+    "mongoose": "^7.0.0",
     "multer": "^1.4.5-lts.1",
     "nodemon": "^2.0.20",
-    "ts-node": "^10.9.1",
     "typescript": "^4.9.5"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.13",
-    "@types/express": "^4.17.17"
+    "ts-node": "^10.9.1"
   }
 }
