@@ -3,11 +3,11 @@ import path from 'path';
 
 export default {
   storage: Multer.diskStorage({
-    destination: path.resolve(__dirname, 'uploads'),
+    destination: path.resolve(__dirname, '..', '..', 'uploads'),
     filename: (req, file, cb) => {
-      console.log('file', file);
-      const fileName = `${Date.now()}-${file.originalname}`;
-      cb(null, fileName);
+      const ext = path.extname(file.originalname);
+      const name = path.basename(file.originalname, ext);
+      cb(null, `${name}${ext}`);
     },
   }),
 };
