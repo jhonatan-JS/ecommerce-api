@@ -5,6 +5,8 @@ const router = Router();
 
 router.post('/', userController.create);
 
+router.post('/login', userController.login);
+
 router.get('/', userController.getAll);
 
 router.get('/:id', userController.getById);

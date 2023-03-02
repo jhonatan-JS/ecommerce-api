@@ -41,9 +41,10 @@ const ProductController = {
   },
 
   async getById(req: any, res: any) {
-    const _id = req.params;
+    const id = req.params.id;
+    console.log('id:', id);
     try {
-      const product = await Product.findById(_id);
+      const product = await Product.findById(id);
 
       product
         ? res.status(200).json(product)
@@ -55,21 +56,28 @@ const ProductController = {
 
   async update(req: any, res: any) {
     const id = req.params.id;
+    const { path } = req.file;
 
-    const newProduct = {
-      name: req.body.data.name,
-      description: req.body.data.description,
-      brand: req.body.data.brand,
-      // image: req.body.data.image,
-      image:
-        'http://localhost:3333/files/1619780000000-IMG_20210429_162725.jpg',
-      price: req.body.data.price,
+    const responseFile = await upDrive(path);
+    const pathFile =
+      'https://drive.google.com/uc?export=view&id=' + responseFile?.data.id;
+
+    const productUpdated = {
+      name: req.body.name,
+      description: req.body.description,
+      brand: req.body.brand,
+      image: pathFile,
+      price: parseInt(req.body.price),
     };
 
     try {
-      const updateProduct = await Product.findByIdAndUpdate(id, newProduct, {
-        new: true,
-      });
+      const updateProduct = await Product.findByIdAndUpdate(
+        id,
+        productUpdated,
+        {
+          new: true,
+        },
+      );
 
       res.status(200).json(updateProduct);
     } catch (err) {

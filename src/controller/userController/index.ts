@@ -33,13 +33,22 @@ const UserController = {
     } catch (err) {}
   },
 
-  async login(req: any, res: any) {},
+  async login(req: any, res: any) {
+    const { email, password } = req.body;
+    console.log('email', email);
+
+    const userCurrent = await User.findOne({ email });
+
+    userCurrent?.password === password
+      ? res.status(200).json(userCurrent)
+      : res.status(404).json({ message: 'User not found' });
+  },
 
   async getById(req: any, res: any) {
-    const _id = req.params;
+    const id = req.params.id;
 
     try {
-      const user = await User.findById(_id);
+      const user = await User.findById(id);
 
       user
         ? res.status(200).json(user)
@@ -50,17 +59,13 @@ const UserController = {
   },
 
   async update(req: any, res: any) {
-    const _id = req.params;
+    const id = req.params.id;
     const { name, email, password } = req.body;
 
-    const userCurrent = await User.findById(_id);
+    const userCurrent = await User.findById(id);
 
     if (!userCurrent) {
       return res.status(404).json({ message: 'User not found' });
-    }
-
-    if (userCurrent.email !== email) {
-      return res.status(404).json({ message: 'Email error' });
     }
 
     const user = {
@@ -70,7 +75,7 @@ const UserController = {
     };
 
     try {
-      const updateUser = await User.findOneAndUpdate(_id, user);
+      const updateUser = await User.findOneAndUpdate(id, user);
 
       updateUser
         ? res.status(200).json(user)
