@@ -1,16 +1,15 @@
 {
   "scripts": {
     "dev": "nodemon ./src/app.ts",
-    "start": "node build/app.js",
-    "build": "tsc"
-
+    "build": "tsc",
+    "start": "node dist/app.js"
   },
   "name": "ecommerce",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "engines": {
-    "node": "18"
+    "node": ">= 14.0.0"
   },
   "keywords": [],
   "author": "",
