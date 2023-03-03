@@ -35,14 +35,12 @@ const ProductController = {
       const products = await Product.find();
       res.status(200).json(products);
     } catch (err) {
-      console.log('err', err);
       res.status(404).json({ message: 'Products not found' });
     }
   },
 
   async getById(req: any, res: any) {
     const id = req.params.id;
-    console.log('id:', id);
     try {
       const product = await Product.findById(id);
 
@@ -81,7 +79,6 @@ const ProductController = {
 
       res.status(200).json(updateProduct);
     } catch (err) {
-      console.log('err', err);
       res.status(404).json({ message: 'Product not found' });
     }
   },

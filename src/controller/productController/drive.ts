@@ -13,8 +13,6 @@ const uploadFile = async (fileMulter: any) => {
       scopes: ['https://www.googleapis.com/auth/drive'],
     });
 
-    console.log('auth', auth);
-
     const driveService = google.drive({
       version: 'v3',
       auth,
@@ -35,7 +33,6 @@ const uploadFile = async (fileMulter: any) => {
       media: media,
       fields: 'id',
     });
-    console.log('response', response);
     return response;
   } catch (err) {
     console.log(err);

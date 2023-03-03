@@ -14,7 +14,7 @@ router.get('/', ProductController.getAll);
 
 router.get('/:id', ProductController.getById);
 
-router.put('/:id', ProductController.update);
+router.put('/:id', upload.single('image'), ProductController.update);
 
 router.delete('/:id', async (req, res) => {
   const getProduct = await Product.findById({ _id: req.params.id });

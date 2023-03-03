@@ -34,8 +34,7 @@ const UserController = {
   },
 
   async login(req: any, res: any) {
-    const { email, password } = req.body;
-    console.log('email', email);
+    const { email, password } = req.body.data;
 
     const userCurrent = await User.findOne({ email });
 
@@ -60,7 +59,7 @@ const UserController = {
 
   async update(req: any, res: any) {
     const id = req.params.id;
-    const { name, email, password } = req.body;
+    const { name, email, password } = req.body.data;
 
     const userCurrent = await User.findById(id);
 
