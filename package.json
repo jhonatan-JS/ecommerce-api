@@ -1,8 +1,8 @@
 {
   "scripts": {
     "dev": "nodemon ./src/app.ts",
-    "start": "node dist/app.js",
-    "build": "ts ./src/app.ts"
+    "start": "node build/app.js",
+    "build": "tsc"
 
   },
   "name": "ecommerce",
