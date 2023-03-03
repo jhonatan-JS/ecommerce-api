@@ -1,13 +1,17 @@
 {
   "scripts": {
     "dev": "nodemon ./src/app.ts",
-    "start": "node build/app.js",
-    "build": "tsc"
+    "start": "node dist/app.js",
+    "build": "tsup ./src/app.ts"
+
   },
   "name": "ecommerce",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "18"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
